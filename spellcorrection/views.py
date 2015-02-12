@@ -7,11 +7,20 @@ import enchant
 
 class SuggestView(APIView):
 
+    """
+    This is a view class for the suggest endpoint. It only supports a GET method with a single
+    query parameter named 'q'
+    """
+
     def __init__(self):
+        """
+        Only the English dictionary is required for the exercise.
+        """
         self.dictionary = enchant.Dict('en_US')
 
     """
-    List all suggestions for the word supplied as parameter.
+    Returns a list of suggestions for the word supplied as parameter.
+    Also returns a misspelt flag that shows whether the original word was actually misspelt.
     """
 
     def get(self, request, format=None):
@@ -28,11 +37,15 @@ class SuggestView(APIView):
 
 class HomeView(APIView):
 
+    """
+    This is a view class for the root endpoint /. It only supports a GET method.
+    """
+
     def __init__(self):
         self.endpoints = {'suggest': '/suggest?q={query}'}
 
     """
-    List all available URLs.
+    Returns a dictionary of all available URLs/endpoints.
     """
 
     def get(self, request, format=None):
