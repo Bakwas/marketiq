@@ -1,4 +1,4 @@
-## MarketIQ Data Analysis Exercise ##
+# MarketIQ Data Analysis Exercise #
 This R script ranks Twitter users on a scale of 0-100 based on these metrics provided in the data.
 write normal text in roxygen comments.
 * Number of followers: Users who follow the Twitter handle.
@@ -6,7 +6,7 @@ write normal text in roxygen comments.
 * Tweets: Total number of tweets ever tweeted.
 * Number of Retweets: Total number of combined retweets for all tweets coming from the handle.
 
-# Introduction #
+## Introduction ##
 The most popular way of ranking twitter users is to use a PageRank algorithm on the users' social network graph. 
 However for that we need additional data like which users follows a particular user and which retweets relate to a particular tweet.
 Since we do not have that data, we will start with very basic assumptions about the Twitter social network.
@@ -17,7 +17,7 @@ Since we do not have that data, we will start with very basic assumptions about 
 * Many tweets may also imply higher rank but many tweets with few retweets may also indicate a spammer.
 
 With these assumptions, lets dive into our data analysis.
-# Initialization #
+## Initialization ##
 Initialize random seed and load the given csv file into a data frame.
 
 
@@ -28,7 +28,7 @@ twitter_users <- read.csv("TwitterUsers.csv", stringsAsFactors = FALSE)
 
 It makes sense to filter out users who have no followers or zero tweets to remove bots.
 But since it did not change the analysis in the end, we decided to preserve them.
-# Distributon Analysis #
+## Distributon Analysis ##
 Lets look at the distibution of followers count.
 
 
@@ -74,7 +74,7 @@ hist(log(twitter_users$Tweets + 1), col = "brown",
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-2.png) 
 
-# Outline of Formula #
+## Outline of Formula ##
 Now that we have a bunch of nice Gaussians, here's the outline of our formula to rank users.
 * First we will transform all metrics to their natural logs (after adding 1 so that zeros do not create problems)
 * Then we will scale all log metrics to their z-scores. z_score = (x - mean) / sd. This ensures that for all
@@ -84,7 +84,7 @@ Now that we have a bunch of nice Gaussians, here's the outline of our formula to
   follows a standard normal distribution with mean 0 and sd 1.
 * Finally we will calculate a percentile value of the rank that is in the range 1..100. This will be our final rank.
 
-# Global Population Statistics #
+## Global Population Statistics ##
 First things first: Lets calculate the averages and standard deviations of all log metrics.
 
 
@@ -102,7 +102,7 @@ log_mean_retweets <- mean(log(twitter_users$Number.of.retweets + 1))
 log_sd_retweets <- sd(log(twitter_users$Number.of.retweets + 1))
 ```
 
-# Rank Function #
+## Rank Function ##
 This is the rank function described above.
 This function takes the number of followers, friends, tweets and retweets of a user (raw count NOT log)
 along with a weight vector and returns a rank in the range 0...100 based on the above formula
@@ -134,7 +134,7 @@ rank_twitter_user <- function(followers = 0, friends = 0,
 }
 ```
 
-# Evaluation #
+## Evaluation ##
 Notice that the default weight vector is all 1s. we did not hard code the weights but instead they are passed as parameters. 
 This makes the equation customizable. e.g. Lets try these weights
 
