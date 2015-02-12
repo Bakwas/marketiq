@@ -88,7 +88,7 @@ rank_twitter_user <- function(followers = 0, friends = 0,
   retweets <- log_z_score(retweets, log_mean_retweets, log_sd_retweets)
   
   # rank is a linear weighted combination of other gaussians.
-  # we normalize it by dividing it with root-sum-squared sd.
+  # we normalize it by dividing it with root-sum-squared weights
   rank <- (weights["followers"] * followers + 
              weights["friends"] * friends + 
              weights["tweets"] * tweets +

@@ -329,7 +329,7 @@ along with a weight vector and returns a rank in the range 0&hellip;100 based on
   retweets &lt;- log_z_score(retweets, log_mean_retweets, log_sd_retweets)
 
   # rank is a linear weighted combination of other gaussians.
-  # we normalize it by dividing it with root-sum-squared sd.
+  # we normalize it by dividing it with root-sum-squared weights
   rank &lt;- (weights[&quot;followers&quot;] * followers + 
              weights[&quot;friends&quot;] * friends + 
              weights[&quot;tweets&quot;] * tweets +
