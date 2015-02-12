@@ -1,4 +1,4 @@
-# MarketIQ Exercises #
+## MarketIQ Exercises ##
 
 # For Twitter Data Analysis Exercise:
 * The R source code is available here: 
