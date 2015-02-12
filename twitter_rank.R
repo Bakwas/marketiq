@@ -104,9 +104,11 @@ rank_twitter_user <- function(followers = 0, friends = 0,
 #' This makes the equation customizable. e.g. Lets try these weights
 weights <- c(followers = 1.5, friends = -0.5, tweets = 1, retweets = 2)
 
-#' This corrsponds to the equation:
-#' rank = 1.5 * followers - 0.5 * friends + 1 * tweets + 2 * retweets
-#' All metrics on the right side are scaled logarithmic. Basically it means we are giving the highest weight to retweets
+#' This corresponds to the equation:
+#' 
+#' `rank = 1.5 * followers - 0.5 * friends + 1 * tweets + 2 * retweets`
+#'
+#' All variables on the right hand side are scaled logarithmic. Basically it means we are giving the highest weight to retweets
 #' and negative weight to friends (see the initial assumptions for why this is so).
 
 #' Lets calculate the rank of all the users in the data frame.
