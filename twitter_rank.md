@@ -1,6 +1,5 @@
 # MarketIQ Data Analysis Exercise #
 This R script ranks Twitter users on a scale of 0-100 based on these metrics provided in the data.
-write normal text in roxygen comments.
 * Number of followers: Users who follow the Twitter handle.
 * Number of friends: Number of users the Twitter handle follows.
 * Tweets: Total number of tweets ever tweeted.
